@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://kqgm01vshbqo"]
+
+[ext_resource type="Theme" uid="uid://cmnme2da8v87d" path="res://assets/ui theme/player_ui_theme.tres" id="1_7l4kx"]
+[ext_resource type="Script" path="res://canvas/player_hud.gd" id="1_60wfn"]
+[ext_resource type="Texture2D" uid="uid://cr17ur2bgeybu" path="res://assets/hud/reticle/reticle_4.png" id="1_ntdmo"]
+
+[node name="player_hud" type="CanvasLayer"]
+script = ExtResource("1_60wfn")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7l4kx")
+
+[node name="reticle" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ntdmo")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 2
+offset_right = 152.0
+offset_bottom = 70.0
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="item_name_label" type="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Item:"
+
+[node name="item_name" type="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="item_type_label" type="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Type:"
+
+[node name="item_type" type="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "
+"

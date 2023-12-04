@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dkjapunxk24l"]
+
+[ext_resource type="Script" path="res://ItemData/ItemData.gd" id="1_apc8a"]
+
+[resource]
+script = ExtResource("1_apc8a")
+name = "apple"
+type = 0

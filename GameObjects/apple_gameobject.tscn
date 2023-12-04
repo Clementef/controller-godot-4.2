@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://o44r277w0dpb"]
+
+[ext_resource type="PackedScene" uid="uid://cdowlcprmfxsm" path="res://GameObjects/gameobject.tscn" id="1_inny3"]
+[ext_resource type="Resource" uid="uid://dkjapunxk24l" path="res://ItemData/apple_itemdata.tres" id="2_3p3xb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5utxy"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_22hp3"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqyvd"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="apple" instance=ExtResource("1_inny3")]
+item_data = ExtResource("2_3p3xb")
+
+[node name="collider" parent="." index="0"]
+shape = SubResource("SphereShape3D_5utxy")
+
+[node name="mesh" parent="." index="1"]
+mesh = SubResource("SphereMesh_22hp3")
+surface_material_override/0 = SubResource("StandardMaterial3D_aqyvd")
