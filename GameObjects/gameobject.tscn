@@ -4,12 +4,14 @@
 [ext_resource type="Resource" uid="uid://dg40kx555sdtr" path="res://ItemData/crate_itemdata.tres" id="2_po0p6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2oadn"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_euysh"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="game_object" type="RigidBody3D"]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 15
 script = ExtResource("1_pefcf")
 physics_activated = true
 item_data = ExtResource("2_po0p6")

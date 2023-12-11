@@ -8,8 +8,8 @@ extends CharacterBody3D
 @export var jump_height = .75
 @onready var head = $head_rotation_h
 
-var jump_vel
-var effective_speed
+var jump_vel:float
+var effective_speed:float
 
 func _ready():
 	jump_vel = sqrt(2*G*jump_height)
