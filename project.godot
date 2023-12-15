@@ -93,6 +93,7 @@ toggle_mouse_mode={
 3d_physics/layer_2="player"
 3d_physics/layer_3="enemy"
 3d_physics/layer_4="gameobject"
+3d_physics/layer_5="diegeticinterface"
 
 [rendering]
 

@@ -46,7 +46,7 @@ current = true
 
 [node name="interactor" type="RayCast3D" parent="head_rotation_h/head_rotation_v"]
 target_position = Vector3(0, 0, -2)
-collision_mask = 8
+collision_mask = 24
 collide_with_areas = true
 script = ExtResource("4_qo2rk")
 

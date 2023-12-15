@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlvhp0qtvnxsl"]
+
+[ext_resource type="Script" path="res://scripts/diegetic_button.gd" id="1_wjl1a"]
+
+[node name="diegetic button" type="Button"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "button"
+script = ExtResource("1_wjl1a")

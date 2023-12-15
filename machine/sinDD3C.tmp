@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv0edjttss0jq"]
+
+[ext_resource type="PackedScene" uid="uid://cx4ib3x4ppc32" path="res://machine/machine.tscn" id="1_ffieb"]
+[ext_resource type="Script" path="res://machine/door.gd" id="2_l5jpt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_whil4"]
+size = Vector3(2, 3, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbrcs"]
+albedo_color = Color(0, 0.631373, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5pdpa"]
+material = SubResource("StandardMaterial3D_rbrcs")
+size = Vector3(2, 3, 0.5)
+
+[node name="single_door" instance=ExtResource("1_ffieb")]
+
+[node name="door" type="AnimatableBody3D" parent="." index="0"]
+script = ExtResource("2_l5jpt")
+
+[node name="collider" type="CollisionShape3D" parent="door" index="0"]
+shape = SubResource("BoxShape3D_whil4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="door" index="1"]
+mesh = SubResource("BoxMesh_5pdpa")

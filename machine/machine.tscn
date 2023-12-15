@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx4ib3x4ppc32"]
+
+[ext_resource type="Script" path="res://scripts/machine.gd" id="1_vhtxh"]
+
+[node name="machine" type="Node3D"]
+script = ExtResource("1_vhtxh")

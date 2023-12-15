@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bei2m3jyi1hl1"]
+
+[ext_resource type="Script" path="res://scripts/diagetic_interface.gd" id="1_e518h"]
+[ext_resource type="Script" path="res://diegetic ui/interface_area.gd" id="2_h20od"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_a2f7c"]
+size = Vector2(0.6, 0.6)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4n86i"]
+viewport_path = NodePath("viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jiw0i"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_4n86i")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xw5lp"]
+size = Vector3(0.6, 0.6, 0.001)
+
+[node name="diegetic_interface" type="Node3D"]
+script = ExtResource("1_e518h")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_a2f7c")
+surface_material_override/0 = SubResource("StandardMaterial3D_jiw0i")
+
+[node name="interface_area" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_h20od")
+
+[node name="collider" type="CollisionShape3D" parent="interface_area"]
+shape = SubResource("BoxShape3D_xw5lp")
+
+[node name="viewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 300)
