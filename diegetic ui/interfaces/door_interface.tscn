@@ -18,6 +18,9 @@ albedo_texture = SubResource("ViewportTexture_r5qvn")
 [node name="mesh" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_30jd3")
 
+[node name="viewport" parent="." index="2"]
+transparent_bg = false
+
 [node name="door_ui" parent="viewport" index="0" instance=ExtResource("2_7sp8f")]
 offset_right = 0.0
 offset_bottom = 0.0

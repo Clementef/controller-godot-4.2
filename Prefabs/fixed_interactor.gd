@@ -39,8 +39,8 @@ func _physics_process(delta):
 			colliding_with = get_collider()
 			colliding_position = get_collision_point()
 		else:
-			colliding_with = colliding_with['collider']
 			colliding_position = colliding_with['position']
+			colliding_with = colliding_with['collider']
 		# do things for type of collider
 		if colliding_with is GameObject:
 			item_selected = true
@@ -49,6 +49,7 @@ func _physics_process(delta):
 			#cursor.global_position = get_collision_point()
 			var viewport_local = colliding_with.global_transform.affine_inverse()*colliding_position
 			var viewport_point = Vector2(viewport_local.x,-viewport_local.y)
+			#print("diegetic position " + str(viewport_point))
 			# push origin to top left of mesh local space
 			viewport_point.x += colliding_with.mesh.get_mesh().size.x / 2
 			viewport_point.y += colliding_with.mesh.get_mesh().size.y / 2
@@ -84,7 +85,7 @@ func _physics_process(delta):
 func raycast_from_mouse(m_pos, collision_mask):
 	var ray_start = camera.project_ray_origin(m_pos)
 	var ray_end = ray_start + camera.project_ray_normal(m_pos) * ray_length
-	var world3d : World3D = get_world_3d()
+	var world3d:World3D = get_world_3d()
 	var space_state = world3d.direct_space_state
 	
 	if space_state == null:
