@@ -1,6 +1,6 @@
 extends RayCast3D
 
-@onready var player_hud = $"../../../player_hud" as PlayerHud
+@onready var player_hud = $"../../../../player_hud" as PlayerHud
 @onready var camera = $"../camera"
 @export var ray_length := 3
 

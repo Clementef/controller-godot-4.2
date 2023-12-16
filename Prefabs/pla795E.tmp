@@ -11,6 +11,8 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_msne8"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xju4v"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_7uxet"]
 radius = 0.05
 height = 0.1
@@ -18,12 +20,15 @@ height = 0.1
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5chmb"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xju4v"]
-
 [node name="player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_cpbul")
+G = null
+speed = null
+sprint_speed = null
+acceleration = null
+jump_control = null
 jump_height = 1.0
 
 [node name="player_hud" parent="." instance=ExtResource("2_y6hmd")]
@@ -31,11 +36,6 @@ jump_height = 1.0
 [node name="physics_interpolation" type="Node3D" parent="."]
 script = ExtResource("3_2iuaj")
 target = NodePath("..")
-
-[node name="mesh" type="MeshInstance3D" parent="physics_interpolation"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_msne8")
-skeleton = NodePath("../..")
 
 [node name="head_rotation_h" type="Node3D" parent="physics_interpolation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
@@ -52,31 +52,35 @@ collision_mask = 24
 collide_with_areas = true
 script = ExtResource("4_qo2rk")
 
-[node name="arms_position" type="Node3D" parent="physics_interpolation"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
-script = ExtResource("4_6fi6q")
-
-[node name="right_hand" type="Node3D" parent="physics_interpolation/arms_position"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, -1)
-script = ExtResource("5_cfj4u")
-hand_speed = 7.0
-
-[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/right_hand"]
-mesh = SubResource("SphereMesh_7uxet")
-skeleton = NodePath("../../left_hand")
-surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
-
-[node name="left_hand" type="Node3D" parent="physics_interpolation/arms_position"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, -1)
-script = ExtResource("5_cfj4u")
-
-[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/left_hand"]
-mesh = SubResource("SphereMesh_7uxet")
-surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
-
-[node name="arms_input_map" type="Node3D" parent="physics_interpolation/arms_position"]
-script = ExtResource("6_s0bow")
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_msne8")
 
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_xju4v")
+
+[node name="arms_position" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+script = ExtResource("4_6fi6q")
+
+[node name="right_hand" type="Node3D" parent="arms_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, -1)
+script = ExtResource("5_cfj4u")
+hand_speed = 7.0
+
+[node name="mesh" type="MeshInstance3D" parent="arms_position/right_hand"]
+mesh = SubResource("SphereMesh_7uxet")
+skeleton = NodePath("../../left_hand")
+surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
+
+[node name="left_hand" type="Node3D" parent="arms_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, -1)
+script = ExtResource("5_cfj4u")
+
+[node name="mesh" type="MeshInstance3D" parent="arms_position/left_hand"]
+mesh = SubResource("SphereMesh_7uxet")
+surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
+
+[node name="arms_input_map" type="Node3D" parent="arms_position"]
+script = ExtResource("6_s0bow")

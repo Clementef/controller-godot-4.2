@@ -6,12 +6,13 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_5utxy"]
 radius = 0.2
 
-[sub_resource type="SphereMesh" id="SphereMesh_22hp3"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkg21"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hhwp1"]
+material = SubResource("StandardMaterial3D_rkg21")
 radius = 0.2
 height = 0.4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqyvd"]
-albedo_color = Color(0, 1, 1, 1)
 
 [node name="apple" instance=ExtResource("1_inny3")]
 item_data = ExtResource("2_3p3xb")
@@ -19,6 +20,5 @@ item_data = ExtResource("2_3p3xb")
 [node name="collider" parent="." index="0"]
 shape = SubResource("SphereShape3D_5utxy")
 
-[node name="mesh" parent="." index="1"]
-mesh = SubResource("SphereMesh_22hp3")
-surface_material_override/0 = SubResource("StandardMaterial3D_aqyvd")
+[node name="mesh" parent="Smoothing" index="0"]
+mesh = SubResource("SphereMesh_hhwp1")

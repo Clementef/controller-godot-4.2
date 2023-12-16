@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdowlcprmfxsm"]
+[gd_scene load_steps=6 format=3 uid="uid://cdowlcprmfxsm"]
 
 [ext_resource type="Script" path="res://GameObjects/GameObject.gd" id="1_pefcf"]
 [ext_resource type="Resource" uid="uid://dg40kx555sdtr" path="res://ItemData/crate_itemdata.tres" id="2_po0p6"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_t4sqv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2oadn"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -13,11 +14,15 @@ size = Vector3(0.5, 0.5, 0.5)
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_pefcf")
-physics_activated = true
 item_data = ExtResource("2_po0p6")
 
 [node name="collider" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_2oadn")
 
-[node name="mesh" type="MeshInstance3D" parent="."]
+[node name="Smoothing" type="Node3D" parent="."]
+script = ExtResource("3_t4sqv")
+target = NodePath("..")
+
+[node name="mesh" type="MeshInstance3D" parent="Smoothing"]
 mesh = SubResource("BoxMesh_euysh")
+skeleton = NodePath("../..")

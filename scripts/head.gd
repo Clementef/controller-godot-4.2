@@ -1,8 +1,8 @@
 extends Node3D
 @export var sens := 1.;
 @export var vertical_margin := 0.01;
-@onready var player_hud = $"../player_hud"
 @onready var head_rotation_v := $head_rotation_v
+@onready var player_hud = $"../../player_hud"
 var true_sens := 0.
 # accumulators
 var rot_x := 0.

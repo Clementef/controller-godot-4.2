@@ -5,7 +5,7 @@ class_name Hand
 @export var hand_speed := 5.
 @export var throw_force_magnitude := 200.
 @onready var interactor = $"../../head_rotation_h/head_rotation_v/interactor"
-@onready var player = $"../.."
+@onready var player = $"../../.."
 
 var held_item = null
 var reach_length = 1.

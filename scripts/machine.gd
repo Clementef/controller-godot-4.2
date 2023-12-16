@@ -1,11 +1,11 @@
 extends Node3D
 class_name Machine
 
-@export var interface:DiegeticInterface
+@export var interfaces:Array[DiegeticInterface]
 @export var action_map:Array[Action]
 
 func _ready():
-	if interface:
+	for interface in interfaces:
 		interface.button_pressed.connect(_activate_machine)
 
 func _activate_machine(id:int):

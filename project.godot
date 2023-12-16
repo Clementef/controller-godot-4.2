@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Gamecontrol="res://scripts/gamecontrol.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/smoothing/plugin.cfg")
+
 [input]
 
 forward={
@@ -94,6 +98,10 @@ toggle_mouse_mode={
 3d_physics/layer_3="enemy"
 3d_physics/layer_4="gameobject"
 3d_physics/layer_5="diegeticinterface"
+
+[physics]
+
+common/enable_object_picking=false
 
 [rendering]
 

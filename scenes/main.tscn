@@ -104,10 +104,13 @@ shape = SubResource("BoxShape3D_as5pa")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="building/wall2"]
 mesh = SubResource("BoxMesh_ujlu3")
 
-[node name="single_door" parent="building" node_paths=PackedStringArray("interface") instance=ExtResource("6_k3h7a")]
+[node name="single_door" parent="building" node_paths=PackedStringArray("interfaces") instance=ExtResource("6_k3h7a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-interface = NodePath("../door_interface")
+interfaces = [NodePath("../door_interface"), NodePath("../door_interface2")]
 action_map = Array[ExtResource("6_lv8rw")]([SubResource("Resource_l7l0h"), SubResource("Resource_tf8pu")])
 
 [node name="door_interface" parent="building" instance=ExtResource("6_dndex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49116, 1.14999, 0.551698)
+
+[node name="door_interface2" parent="building" instance=ExtResource("6_dndex")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.51725, 1.14999, -0.550194)

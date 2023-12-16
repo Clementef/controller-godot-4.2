@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export var acceleration = 10.
 @export var jump_control = .15
 @export var jump_height = .75
-@onready var head = $head_rotation_h
+@onready var head = $physics_interpolation/head_rotation_h
 
 var jump_vel:float
 var effective_speed:float
