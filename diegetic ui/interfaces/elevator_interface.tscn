@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7cdjjxp05rv1"]
+
+[ext_resource type="PackedScene" uid="uid://bei2m3jyi1hl1" path="res://diegetic ui/diegetic_interface.tscn" id="1_ovd4s"]
+[ext_resource type="PackedScene" uid="uid://chnnbbivolfgh" path="res://diegetic ui/interfaces/elevator_ui.tscn" id="2_8fg82"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f4ots"]
+viewport_path = NodePath("viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlodf"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_f4ots")
+
+[node name="elevator_interface" instance=ExtResource("1_ovd4s")]
+
+[node name="mesh" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nlodf")
+
+[node name="elevator_ui" parent="viewport" index="0" instance=ExtResource("2_8fg82")]
+offset_right = 0.0
+offset_bottom = 0.0

@@ -4,8 +4,9 @@ class_name Hand
 @export var holding:GameObject = null
 @export var hand_speed := 5.
 @export var throw_force_magnitude := 200.
-@onready var interactor = $"../../head_rotation_h/head_rotation_v/interactor"
 @onready var player = $"../../.."
+@onready var hand_position = $idle_offset/held_offset
+@onready var interactor = $"../../head_rotation_h/head_rotation_v/interactor"
 
 var held_item = null
 var reach_length = 1.
@@ -28,10 +29,11 @@ func interact():
 				# pick up item
 				held_item = collision
 				collision.set_physics(false)
+				#reparent and set position
 				collision.get_parent().remove_child(collision)
 				collision.global_position = Vector3.ZERO
 				collision.global_rotation = Vector3.ZERO
-				add_child(collision)
+				hand_position.add_child(collision)
 			else:
 				print(name + " already holding " + held_item.item_data.name)
 
@@ -42,7 +44,7 @@ func throw():
 		var gpos = held_item.global_position
 		var grot = held_item.global_rotation
 		# reparent 
-		remove_child(held_item)
+		hand_position.remove_child(held_item)
 		get_tree().root.add_child(held_item)
 		# set global transform and linear velocity
 		held_item.global_position = gpos

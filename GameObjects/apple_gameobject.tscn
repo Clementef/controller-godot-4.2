@@ -15,6 +15,7 @@ radius = 0.2
 height = 0.4
 
 [node name="apple" instance=ExtResource("1_inny3")]
+mass = 1.0
 item_data = ExtResource("2_3p3xb")
 
 [node name="collider" parent="." index="0"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bldi4twuqc1ed"]
+
+[ext_resource type="PackedScene" uid="uid://cx4ib3x4ppc32" path="res://machine/machine.tscn" id="1_6bmq0"]
+[ext_resource type="Script" path="res://machine/elevator_body.gd" id="2_gawlt"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_8b7oe"]
+
+[sub_resource type="Animation" id="Animation_5m7lm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gvioj"]
+resource_name = "next_stop"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51dls"]
+_data = {
+"RESET": SubResource("Animation_5m7lm"),
+"next_stop": SubResource("Animation_gvioj")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cxe8m"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6qyb7"]
+size = Vector3(2, 0.1, 2)
+
+[node name="elevator_machine" instance=ExtResource("1_6bmq0")]
+
+[node name="elevator_body" type="AnimatableBody3D" parent="." index="0"]
+script = ExtResource("2_gawlt")
+
+[node name="animation" type="AnimationPlayer" parent="elevator_body" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_51dls")
+}
+
+[node name="collider" type="CollisionShape3D" parent="elevator_body" index="1"]
+shape = SubResource("BoxShape3D_cxe8m")
+
+[node name="Smoothing" type="Node3D" parent="elevator_body" index="2"]
+script = ExtResource("3_8b7oe")
+
+[node name="mesh" type="MeshInstance3D" parent="elevator_body/Smoothing" index="0"]
+mesh = SubResource("BoxMesh_6qyb7")
+skeleton = NodePath("../..")

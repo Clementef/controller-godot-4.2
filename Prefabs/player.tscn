@@ -59,19 +59,29 @@ script = ExtResource("4_6fi6q")
 [node name="right_hand" type="Node3D" parent="physics_interpolation/arms_position"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, -1)
 script = ExtResource("5_cfj4u")
-hand_speed = 7.0
+throw_force_magnitude = 400.0
 
-[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/right_hand"]
+[node name="idle_offset" type="Node3D" parent="physics_interpolation/arms_position/right_hand"]
+
+[node name="held_offset" type="Node3D" parent="physics_interpolation/arms_position/right_hand/idle_offset"]
+
+[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/right_hand/idle_offset/held_offset"]
 mesh = SubResource("SphereMesh_7uxet")
-skeleton = NodePath("../../left_hand")
+skeleton = NodePath("../../../../left_hand")
 surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
 
 [node name="left_hand" type="Node3D" parent="physics_interpolation/arms_position"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, -1)
 script = ExtResource("5_cfj4u")
+throw_force_magnitude = 400.0
 
-[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/left_hand"]
+[node name="idle_offset" type="Node3D" parent="physics_interpolation/arms_position/left_hand"]
+
+[node name="held_offset" type="Node3D" parent="physics_interpolation/arms_position/left_hand/idle_offset"]
+
+[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/left_hand/idle_offset/held_offset"]
 mesh = SubResource("SphereMesh_7uxet")
+skeleton = NodePath("../../../../left_hand")
 surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
 
 [node name="arms_input_map" type="Node3D" parent="physics_interpolation/arms_position"]

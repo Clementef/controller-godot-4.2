@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://chnnbbivolfgh"]
+
+[ext_resource type="PackedScene" uid="uid://k6rk48wk76pe" path="res://diegetic ui/diegetic_ui.tscn" id="1_x4uqs"]
+[ext_resource type="PackedScene" uid="uid://dlvhp0qtvnxsl" path="res://diegetic ui/diegetic_button.tscn" id="2_6yfbq"]
+
+[node name="elevator_ui" instance=ExtResource("1_x4uqs")]
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Elevator"
+
+[node name="diegetic button" parent="MarginContainer/VBoxContainer/buttons" index="0" instance=ExtResource("2_6yfbq")]
+layout_mode = 2
+text = "Next Stop"

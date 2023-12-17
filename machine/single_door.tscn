@@ -1,17 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv0edjttss0jq"]
+[gd_scene load_steps=11 format=3 uid="uid://bv0edjttss0jq"]
 
 [ext_resource type="PackedScene" uid="uid://cx4ib3x4ppc32" path="res://machine/machine.tscn" id="1_ffieb"]
+[ext_resource type="PhysicsMaterial" uid="uid://cw4lwqhtr4f4x" path="res://materials/physics_materials/basic_material.tres" id="2_fmgs0"]
 [ext_resource type="Script" path="res://machine/door.gd" id="2_l5jpt"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_2sa6y"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_whil4"]
-size = Vector3(2, 3, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbrcs"]
-albedo_color = Color(0, 0.631373, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5pdpa"]
-material = SubResource("StandardMaterial3D_rbrcs")
-size = Vector3(2, 3, 0.5)
+[sub_resource type="Animation" id="Animation_c7coo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_r378t"]
 resource_name = "move_elevator"
@@ -29,39 +36,39 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-1.95, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_c7coo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0s10"]
 _data = {
 "RESET": SubResource("Animation_c7coo"),
 "move_elevator": SubResource("Animation_r378t")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_whil4"]
+size = Vector3(2, 3, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbrcs"]
+albedo_color = Color(0, 0.631373, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5pdpa"]
+material = SubResource("StandardMaterial3D_rbrcs")
+size = Vector3(2, 3, 0.5)
+
 [node name="single_door" instance=ExtResource("1_ffieb")]
 
 [node name="door" type="AnimatableBody3D" parent="." index="0"]
+physics_material_override = ExtResource("2_fmgs0")
 script = ExtResource("2_l5jpt")
 
-[node name="collider" type="CollisionShape3D" parent="door" index="0"]
-shape = SubResource("BoxShape3D_whil4")
-
-[node name="mesh" type="MeshInstance3D" parent="door" index="1"]
-mesh = SubResource("BoxMesh_5pdpa")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="door" index="2"]
+[node name="animation" type="AnimationPlayer" parent="door" index="0"]
 libraries = {
 "": SubResource("AnimationLibrary_v0s10")
 }
+
+[node name="collider" type="CollisionShape3D" parent="door" index="1"]
+shape = SubResource("BoxShape3D_whil4")
+
+[node name="Smoothing" type="Node3D" parent="door" index="2"]
+script = ExtResource("3_2sa6y")
+
+[node name="mesh" type="MeshInstance3D" parent="door/Smoothing" index="0"]
+mesh = SubResource("BoxMesh_5pdpa")
+skeleton = NodePath("../..")

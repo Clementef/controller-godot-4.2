@@ -1,6 +1,6 @@
 extends AnimatableBody3D
-@onready var mesh = $mesh
-@onready var animation_player = $AnimationPlayer
+@onready var mesh = $Smoothing/mesh
+@onready var animation = $animation
 var elevator_forward = true
 
 func toggle_visible():
@@ -11,7 +11,7 @@ func random_color():
 
 func next_stop():
 	if elevator_forward:
-		animation_player.play("move_elevator",-1,1,false)
+		animation.play("move_elevator",-1,1,false)
 	else:
-		animation_player.play("move_elevator",-1,-1,true)
+		animation.play("move_elevator",-1,-1,true)
 	elevator_forward = !elevator_forward
