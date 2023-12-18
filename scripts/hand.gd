@@ -17,13 +17,26 @@ func _init():
 		held_item.set_physics(false)
 
 func process_inputs():
+	# native hand inputs
 	if Input.is_action_just_pressed("interact"):
 		interact()
 	if Input.is_action_just_pressed("throw"):
 		throw()
+	
+	# game object inputs
+	# exit if no held item
+	if !held_item:
+		return
+	# process inputs
+	if Input.is_action_just_pressed("aim"):
+		held_item.process_input("aim")
+	if Input.is_action_just_released("aim"):
+		held_item.process_input("aim_release")
+	
 	if Input.is_action_just_pressed("shoot"):
-		if held_item:
-			held_item.gameobject_input("shoot")
+		held_item.process_input("shoot")
+	if Input.is_action_just_released("shoot"):
+		held_item.process_input("shoot_release")
 
 func interact():
 	if interactor.colliding_with != null:

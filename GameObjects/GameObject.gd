@@ -2,37 +2,37 @@ extends RigidBody3D
 class_name GameObject
 
 @export var physics_activated := true
-@export var item_data:ItemData
 @onready var collider = $collider
 @onready var smoothing = $"Smoothing" as Smoothing 
 @onready var mesh = $Smoothing.get_child(0)
 @onready var held_offset = $"../"
 var mesh_smoothing := true
 const smoothing_setting := 7
-@onready var input_map:GameObjectInputMap
 
-func gameobject_input(input:String):
-	# exit if not input map
-	if input_map == null:
-		print("no input map")
-		return
-	# exit if action is not mapped
-	if !(input in input_map):
-		print("action " + input + " not mapped")
-		return
-	# exit if method does not exist
-	if !self.has_method(input):
-		print("call failed, method does not exist")
-		return
-	# everything exists, call the function
-	var callable = Callable(self, input)
-	callable.call()
+@export var item_data:ItemData = ItemData.new() as ItemData
+var input_map:GameObjectInputMap
 
+# only called when all children ready
 func _ready():
+	set_physics(physics_activated)
 	for child in get_children():
 		if child is GameObjectInputMap:
+			#print(name + " input map found")
 			input_map = child
-	set_physics(physics_activated)
+	#print(input_map.name)
+
+func process_input(input:String):
+	# exit if no input map
+	if !input_map:
+		print("no input map")
+		return
+	# exit if input not mapped
+	if !(input in input_map):
+		print("input not mapped")
+		return
+	# input map is dictionary { string: Callable }
+	# map and input exist, call mapped callable
+	input_map.input_map[input].call()
 
 func set_physics(b:bool):
 	freeze = !b
