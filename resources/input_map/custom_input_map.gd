@@ -14,9 +14,15 @@ extends GameObjectInputMap
 @export_subgroup("impulse_horizontal")
 @export var impulse_z := .03
 
+@onready var barrel_raycast = $barrel_raycast
+
 func shoot():
+	# add recoil
 	recoil.emit(recoil_v,recoil_roll,recoil_yaw,
 				impulse_x,impulse_y,impulse_z)
-
-func shoot_release():
-	print("custom shoot release function")
+	# exit if barrel raycast not colliding
+	if !barrel_raycast.is_colliding():
+		print("no bullet collision")
+		return
+	# do something with raycast data
+	print(barrel_raycast.get_collision_point())

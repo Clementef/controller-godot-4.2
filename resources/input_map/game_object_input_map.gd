@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name GameObjectInputMap
 
 var input_map:Dictionary = \

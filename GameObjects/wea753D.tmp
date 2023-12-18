@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://clymik0ttb101"]
+
+[ext_resource type="PackedScene" uid="uid://cdowlcprmfxsm" path="res://GameObjects/gameobject.tscn" id="1_mehny"]
+[ext_resource type="PackedScene" uid="uid://gwowgy4s8oq8" path="res://resources/input_map/weapon_input_map.tscn" id="2_3xpgn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4spdj"]
+size = Vector3(0.25, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_utmae"]
+size = Vector3(0.25, 0.2, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yewdm"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 10.0
+
+[node name="weapon" instance=ExtResource("1_mehny")]
+
+[node name="collider" parent="." index="0"]
+shape = SubResource("BoxShape3D_4spdj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Smoothing" index="0"]
+mesh = SubResource("BoxMesh_utmae")
+
+[node name="weapon_input_map" parent="." index="2" instance=ExtResource("2_3xpgn")]
+
+[node name="barrel_raycast" type="RayCast3D" parent="weapon_input_map" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+target_position = Vector3(0, 0, -5)
+
+[node name="laser" type="Node3D" parent="weapon_input_map" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.25)
+
+[node name="mesh" type="MeshInstance3D" parent="weapon_input_map/laser" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+mesh = SubResource("CylinderMesh_yewdm")
+skeleton = NodePath("../..")
