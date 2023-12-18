@@ -1,17 +1,18 @@
-[gd_scene load_steps=29 format=3 uid="uid://ifpr03ir7vkr"]
+[gd_scene load_steps=30 format=3 uid="uid://ifpr03ir7vkr"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cw4lwqhtr4f4x" path="res://materials/physics_materials/basic_material.tres" id="1_1hx7r"]
 [ext_resource type="Shader" path="res://shaders/meter_grid.gdshader" id="1_2cl5d"]
 [ext_resource type="PackedScene" uid="uid://mveriwb8xmdx" path="res://Prefabs/player.tscn" id="2_7fa5k"]
+[ext_resource type="PackedScene" uid="uid://dh7e8xlmnacly" path="res://GameObjects/cube.tscn" id="4_h0gk6"]
 [ext_resource type="PackedScene" uid="uid://o44r277w0dpb" path="res://GameObjects/apple_gameobject.tscn" id="4_ounjt"]
 [ext_resource type="PackedScene" uid="uid://shqwtgyshnuw" path="res://diegetic ui/interfaces/door_interface.tscn" id="6_dndex"]
 [ext_resource type="PackedScene" uid="uid://bv0edjttss0jq" path="res://machine/single_door.tscn" id="6_k3h7a"]
 [ext_resource type="Script" path="res://scripts/action.gd" id="6_lv8rw"]
-[ext_resource type="PackedScene" uid="uid://cdowlcprmfxsm" path="res://GameObjects/gameobject.tscn" id="8_htk2o"]
 [ext_resource type="PackedScene" uid="uid://c7cdjjxp05rv1" path="res://diegetic ui/interfaces/elevator_interface.tscn" id="10_h4j41"]
 [ext_resource type="Script" path="res://scripts/machine.gd" id="10_nfxri"]
 [ext_resource type="Script" path="res://machine/elevator_body.gd" id="11_khpr2"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="12_17ghv"]
+[ext_resource type="PackedScene" uid="uid://clymik0ttb101" path="res://GameObjects/weapon.tscn" id="13_dh71a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ai2yq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -130,8 +131,8 @@ surface_material_override/0 = SubResource("ShaderMaterial_7qa73")
 
 [node name="player" parent="." instance=ExtResource("2_7fa5k")]
 
-[node name="game_object" parent="." instance=ExtResource("8_htk2o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -6.02807)
+[node name="cube" parent="." instance=ExtResource("4_h0gk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -6.1443)
 
 [node name="apple" parent="." instance=ExtResource("4_ounjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.41141, 0.0999999, -5.97545)
@@ -184,6 +185,7 @@ interfaces = [NodePath("elevator_body/Smoothing/elevator_interface"), NodePath("
 action_map = Array[ExtResource("6_lv8rw")]([SubResource("Resource_ldyyg")])
 
 [node name="elevator_body" type="AnimatableBody3D" parent="elevator/elevator_machine"]
+collision_mask = 14
 script = ExtResource("11_khpr2")
 
 [node name="animation" type="AnimationPlayer" parent="elevator/elevator_machine/elevator_body"]
@@ -203,3 +205,6 @@ skeleton = NodePath("../..")
 
 [node name="elevator_interface" parent="elevator/elevator_machine/elevator_body/Smoothing" instance=ExtResource("10_h4j41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57537, -0.991465)
+
+[node name="weapon" parent="." instance=ExtResource("13_dh71a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1723, 0, -1.84653)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://o44r277w0dpb"]
+[gd_scene load_steps=5 format=3 uid="uid://o44r277w0dpb"]
 
 [ext_resource type="PackedScene" uid="uid://cdowlcprmfxsm" path="res://GameObjects/gameobject.tscn" id="1_inny3"]
 [ext_resource type="Resource" uid="uid://dkjapunxk24l" path="res://ItemData/apple_itemdata.tres" id="2_3p3xb"]
@@ -6,11 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_5utxy"]
 radius = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkg21"]
-albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_hhwp1"]
-material = SubResource("StandardMaterial3D_rkg21")
+[sub_resource type="SphereMesh" id="SphereMesh_aw128"]
 radius = 0.2
 height = 0.4
 
@@ -21,5 +17,5 @@ item_data = ExtResource("2_3p3xb")
 [node name="collider" parent="." index="0"]
 shape = SubResource("SphereShape3D_5utxy")
 
-[node name="mesh" parent="Smoothing" index="0"]
-mesh = SubResource("SphereMesh_hhwp1")
+[node name="mesh" type="MeshInstance3D" parent="Smoothing" index="0"]
+mesh = SubResource("SphereMesh_aw128")

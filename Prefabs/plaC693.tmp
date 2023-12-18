@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://mveriwb8xmdx"]
+[gd_scene load_steps=18 format=3 uid="uid://mveriwb8xmdx"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_cpbul"]
 [ext_resource type="PackedScene" uid="uid://kqgm01vshbqo" path="res://canvas/player_hud.tscn" id="2_y6hmd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/input_map.gd" id="6_s0bow"]
 [ext_resource type="Script" path="res://Prefabs/idle_offset.gd" id="8_5ifjn"]
 [ext_resource type="Script" path="res://Prefabs/held_offset.gd" id="9_54dpg"]
+[ext_resource type="PackedScene" uid="uid://clymik0ttb101" path="res://GameObjects/weapon.tscn" id="10_vu3f7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xju4v"]
 
@@ -66,10 +67,11 @@ script = ExtResource("4_qo2rk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 script = ExtResource("4_6fi6q")
 
-[node name="right_hand" type="Node3D" parent="physics_interpolation/arms_position"]
+[node name="right_hand" type="Node3D" parent="physics_interpolation/arms_position" node_paths=PackedStringArray("held_item")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, -1)
 script = ExtResource("5_cfj4u")
 throw_force_magnitude = 400.0
+held_item = NodePath("idle_offset/held_offset/weapon")
 
 [node name="idle_offset" type="Node3D" parent="physics_interpolation/arms_position/right_hand"]
 script = ExtResource("8_5ifjn")
@@ -82,6 +84,8 @@ script = ExtResource("9_54dpg")
 mesh = SubResource("SphereMesh_7uxet")
 skeleton = NodePath("../../../../left_hand")
 surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
+
+[node name="weapon" parent="physics_interpolation/arms_position/right_hand/idle_offset/held_offset" instance=ExtResource("10_vu3f7")]
 
 [node name="left_hand" type="Node3D" parent="physics_interpolation/arms_position"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, -1)

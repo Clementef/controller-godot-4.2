@@ -11,8 +11,6 @@
 [ext_resource type="Script" path="res://Prefabs/idle_offset.gd" id="8_5ifjn"]
 [ext_resource type="Script" path="res://Prefabs/held_offset.gd" id="9_54dpg"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xju4v"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_msne8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ukal5"]
@@ -26,6 +24,8 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2nymv"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xju4v"]
+
 [node name="player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 13
@@ -33,10 +33,6 @@ script = ExtResource("1_cpbul")
 jump_height = 1.0
 
 [node name="player_hud" parent="." instance=ExtResource("2_y6hmd")]
-
-[node name="collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_xju4v")
 
 [node name="physics_interpolation" type="Node3D" parent="."]
 script = ExtResource("3_2iuaj")
@@ -61,6 +57,7 @@ target_position = Vector3(0, 0, -2)
 collision_mask = 31
 collide_with_areas = true
 script = ExtResource("4_qo2rk")
+ray_length = null
 
 [node name="arms_position" type="Node3D" parent="physics_interpolation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
@@ -83,10 +80,11 @@ mesh = SubResource("SphereMesh_7uxet")
 skeleton = NodePath("../../../../left_hand")
 surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
 
-[node name="left_hand" type="Node3D" parent="physics_interpolation/arms_position"]
+[node name="left_hand" type="Node3D" parent="physics_interpolation/arms_position" node_paths=PackedStringArray("held_item")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, -1)
 script = ExtResource("5_cfj4u")
 throw_force_magnitude = 400.0
+held_item = NodePath("")
 
 [node name="idle_offset" type="Node3D" parent="physics_interpolation/arms_position/left_hand"]
 script = ExtResource("8_5ifjn")
@@ -103,3 +101,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
 
 [node name="arms_input_map" type="Node3D" parent="physics_interpolation/arms_position"]
 script = ExtResource("6_s0bow")
+
+[node name="collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xju4v")

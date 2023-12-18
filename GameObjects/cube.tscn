@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh7e8xlmnacly"]
+
+[ext_resource type="PackedScene" uid="uid://cdowlcprmfxsm" path="res://GameObjects/gameobject.tscn" id="1_ndnuh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qgadl"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="cube" instance=ExtResource("1_ndnuh")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Smoothing" index="0"]
+mesh = SubResource("BoxMesh_qgadl")

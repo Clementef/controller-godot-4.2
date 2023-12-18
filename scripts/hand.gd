@@ -1,23 +1,29 @@
 extends Node3D
 class_name Hand
 
-@export var holding:GameObject = null
 @export var hand_speed := 5.
 @export var throw_force_magnitude := 200.
+@export var held_item:GameObject
 @onready var player = $"../../.."
 @onready var hand_position = $idle_offset/held_offset
 @onready var interactor = $"../../head_rotation_h/head_rotation_v/interactor"
 
-var held_item = null
 var reach_length = 1.
 var idle_position:Vector3
 var target = null
+
+func _init():
+	if held_item:
+		held_item.set_physics(false)
 
 func process_inputs():
 	if Input.is_action_just_pressed("interact"):
 		interact()
 	if Input.is_action_just_pressed("throw"):
 		throw()
+	if Input.is_action_just_pressed("shoot"):
+		if held_item:
+			held_item.gameobject_input("shoot")
 
 func interact():
 	if interactor.colliding_with != null:

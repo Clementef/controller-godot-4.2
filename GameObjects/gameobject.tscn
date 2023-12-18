@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdowlcprmfxsm"]
+[gd_scene load_steps=6 format=3 uid="uid://cdowlcprmfxsm"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cw4lwqhtr4f4x" path="res://materials/physics_materials/basic_material.tres" id="1_a8bjy"]
 [ext_resource type="Script" path="res://GameObjects/GameObject.gd" id="1_pefcf"]
@@ -6,9 +6,6 @@
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_t4sqv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2oadn"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_euysh"]
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="game_object" type="RigidBody3D"]
@@ -25,7 +22,3 @@ shape = SubResource("BoxShape3D_2oadn")
 [node name="Smoothing" type="Node3D" parent="."]
 script = ExtResource("3_t4sqv")
 target = NodePath("..")
-
-[node name="mesh" type="MeshInstance3D" parent="Smoothing"]
-mesh = SubResource("BoxMesh_euysh")
-skeleton = NodePath("../..")
