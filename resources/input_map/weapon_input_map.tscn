@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gwowgy4s8oq8"]
+
+[ext_resource type="Script" path="res://resources/input_map/custom_input_map.gd" id="1_0fkwy"]
+
+[node name="weapon_input_map" type="Node"]
+script = ExtResource("1_0fkwy")

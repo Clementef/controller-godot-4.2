@@ -8,8 +8,9 @@ class_name Hand
 @onready var hand_position = $idle_offset/held_offset
 @onready var interactor = $"../../head_rotation_h/head_rotation_v/interactor"
 
-var reach_length = 1.
+var gameobject_inputs:Array[String] = ["aim", "shoot", "reload"]
 var idle_position:Vector3
+var reach_length = 1.
 var target = null
 
 func _init():
@@ -28,15 +29,15 @@ func process_inputs():
 	if !held_item:
 		return
 	# process inputs
-	if Input.is_action_just_pressed("aim"):
-		held_item.process_input("aim")
-	if Input.is_action_just_released("aim"):
-		held_item.process_input("aim_release")
+	for input in gameobject_inputs:
+		gameobject_map(input)
+
+func gameobject_map(input:String):
+	if Input.is_action_just_pressed(input):
+		held_item.process_input(input)
+	if Input.is_action_just_released(input):
+		held_item.process_input(input + "_release")
 	
-	if Input.is_action_just_pressed("shoot"):
-		held_item.process_input("shoot")
-	if Input.is_action_just_released("shoot"):
-		held_item.process_input("shoot_release")
 
 func interact():
 	if interactor.colliding_with != null:

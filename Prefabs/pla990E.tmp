@@ -1,0 +1,105 @@
+[gd_scene load_steps=17 format=3 uid="uid://mveriwb8xmdx"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_cpbul"]
+[ext_resource type="PackedScene" uid="uid://kqgm01vshbqo" path="res://canvas/player_hud.tscn" id="2_y6hmd"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_2iuaj"]
+[ext_resource type="Script" path="res://scripts/head.gd" id="3_wu5wa"]
+[ext_resource type="Script" path="res://scripts/hand_controller.gd" id="4_6fi6q"]
+[ext_resource type="Script" path="res://Prefabs/fixed_interactor.gd" id="4_qo2rk"]
+[ext_resource type="Script" path="res://scripts/hand.gd" id="5_cfj4u"]
+[ext_resource type="Script" path="res://scripts/input_map.gd" id="6_s0bow"]
+[ext_resource type="Script" path="res://Prefabs/idle_offset.gd" id="8_5ifjn"]
+[ext_resource type="Script" path="res://Prefabs/held_offset.gd" id="9_54dpg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xju4v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_msne8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ukal5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7uxet"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5chmb"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2nymv"]
+
+[node name="player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_cpbul")
+jump_height = 1.0
+
+[node name="player_hud" parent="." instance=ExtResource("2_y6hmd")]
+
+[node name="collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xju4v")
+
+[node name="physics_interpolation" type="Node3D" parent="."]
+script = ExtResource("3_2iuaj")
+target = NodePath("..")
+
+[node name="mesh" type="MeshInstance3D" parent="physics_interpolation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_msne8")
+skeleton = NodePath("../..")
+
+[node name="head_rotation_h" type="Node3D" parent="physics_interpolation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+script = ExtResource("3_wu5wa")
+
+[node name="head_rotation_v" type="Node3D" parent="physics_interpolation/head_rotation_h"]
+
+[node name="camera" type="Camera3D" parent="physics_interpolation/head_rotation_h/head_rotation_v"]
+current = true
+
+[node name="interactor" type="RayCast3D" parent="physics_interpolation/head_rotation_h/head_rotation_v"]
+target_position = Vector3(0, 0, -2)
+collision_mask = 31
+collide_with_areas = true
+script = ExtResource("4_qo2rk")
+
+[node name="arms_position" type="Node3D" parent="physics_interpolation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+script = ExtResource("4_6fi6q")
+
+[node name="right_hand" type="Node3D" parent="physics_interpolation/arms_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, -1)
+script = ExtResource("5_cfj4u")
+throw_force_magnitude = 400.0
+
+[node name="idle_offset" type="Node3D" parent="physics_interpolation/arms_position/right_hand"]
+script = ExtResource("8_5ifjn")
+idle_noise = SubResource("FastNoiseLite_ukal5")
+
+[node name="held_offset" type="Node3D" parent="physics_interpolation/arms_position/right_hand/idle_offset"]
+script = ExtResource("9_54dpg")
+
+[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/right_hand/idle_offset/held_offset"]
+mesh = SubResource("SphereMesh_7uxet")
+skeleton = NodePath("../../../../left_hand")
+surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
+
+[node name="left_hand" type="Node3D" parent="physics_interpolation/arms_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, -1)
+script = ExtResource("5_cfj4u")
+throw_force_magnitude = 400.0
+
+[node name="idle_offset" type="Node3D" parent="physics_interpolation/arms_position/left_hand"]
+script = ExtResource("8_5ifjn")
+custom_offset = 1000.0
+idle_noise = SubResource("FastNoiseLite_2nymv")
+
+[node name="held_offset" type="Node3D" parent="physics_interpolation/arms_position/left_hand/idle_offset"]
+script = ExtResource("9_54dpg")
+
+[node name="mesh" type="MeshInstance3D" parent="physics_interpolation/arms_position/left_hand/idle_offset/held_offset"]
+mesh = SubResource("SphereMesh_7uxet")
+skeleton = NodePath("../../../../left_hand")
+surface_material_override/0 = SubResource("StandardMaterial3D_5chmb")
+
+[node name="arms_input_map" type="Node3D" parent="physics_interpolation/arms_position"]
+script = ExtResource("6_s0bow")

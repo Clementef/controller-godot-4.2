@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://clymik0ttb101"]
 
 [ext_resource type="PackedScene" uid="uid://cdowlcprmfxsm" path="res://GameObjects/gameobject.tscn" id="1_mehny"]
-[ext_resource type="Script" path="res://resources/input_map/custom_input_map.gd" id="2_d2vvw"]
+[ext_resource type="PackedScene" uid="uid://gwowgy4s8oq8" path="res://resources/input_map/weapon_input_map.tscn" id="2_3xpgn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4spdj"]
 size = Vector3(0.25, 0.2, 0.5)
@@ -17,5 +17,4 @@ shape = SubResource("BoxShape3D_4spdj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Smoothing" index="0"]
 mesh = SubResource("BoxMesh_utmae")
 
-[node name="custom_input_map" type="Node" parent="." index="2"]
-script = ExtResource("2_d2vvw")
+[node name="weapon_input_map" parent="." index="2" instance=ExtResource("2_3xpgn")]

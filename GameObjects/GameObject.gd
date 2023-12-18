@@ -2,24 +2,28 @@ extends RigidBody3D
 class_name GameObject
 
 @export var physics_activated := true
+@export var item_data:ItemData = ItemData.new() as ItemData
 @onready var collider = $collider
 @onready var smoothing = $"Smoothing" as Smoothing 
 @onready var mesh = $Smoothing.get_child(0)
-@onready var held_offset = $"../"
+var input_map:GameObjectInputMap
 var mesh_smoothing := true
 const smoothing_setting := 7
 
-@export var item_data:ItemData = ItemData.new() as ItemData
-var input_map:GameObjectInputMap
-
 # only called when all children ready
 func _ready():
+	# set physics state
 	set_physics(physics_activated)
+	# find optional child nodes
 	for child in get_children():
 		if child is GameObjectInputMap:
-			#print(name + " input map found")
 			input_map = child
-	#print(input_map.name)
+			child.recoil.connect(self.add_recoil)
+
+func add_recoil(recoil_v:float, recoil_roll:float, recoil_yaw:float,
+				impulse_x:float, impulse_y:float, impulse_z:float):
+	get_parent().add_recoil(recoil_v,recoil_roll,recoil_yaw,
+							impulse_x,impulse_y,impulse_z)
 
 func process_input(input:String):
 	# exit if no input map

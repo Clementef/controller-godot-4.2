@@ -23,7 +23,9 @@ var pos_y := 0.
 var pos_z := 0.
 
 func _process(delta):
-	if !(rotation.is_zero_approx()):
+	if !(rotation.is_zero_approx() and position.is_zero_approx()):
+		rotation = Vector3(rot_x,rot_y,rot_z)
+		position = Vector3(pos_x,pos_y,pos_z)
 		recoil_control(delta)
 
 func add_recoil(recoil_v:float, recoil_roll:float, recoil_yaw:float,
@@ -34,6 +36,8 @@ func add_recoil(recoil_v:float, recoil_roll:float, recoil_yaw:float,
 	pos_x += impulse_x
 	pos_y += impulse_y
 	pos_z += impulse_z * randf_range(-1,1)
+	rotation = Vector3(rot_x,rot_y,rot_z)
+	position = Vector3(pos_x,pos_y,pos_z)
 
 func recoil_control(delta:float):
 	rotation.x = lerp(rotation.x,rot_x,recoil_v_return_rate*delta)

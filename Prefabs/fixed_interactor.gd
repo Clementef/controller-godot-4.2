@@ -15,15 +15,13 @@ func _ready():
 func _physics_process(delta):
 	# update raycast and cache data
 	var colliding := get_raycast()
-	
 	# reset reticle color and clear hud
 	player_hud.set_reticle_color(Color(1.,1.,1.))
 	player_hud.set_item_attributes(null)
-	
+	# exit if not colliding
 	if !colliding:
 		return
-	
-	# colliding, set hud
+	# colliding, cache data and set hud
 	colliding_with = null
 	colliding_position = null
 	get_collision_data()
