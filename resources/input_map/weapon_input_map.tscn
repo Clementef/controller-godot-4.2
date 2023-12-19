@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://gwowgy4s8oq8"]
+[gd_scene load_steps=5 format=3 uid="uid://gwowgy4s8oq8"]
 
 [ext_resource type="Script" path="res://resources/input_map/custom_input_map.gd" id="1_0fkwy"]
+[ext_resource type="Script" path="res://resources/input_map/barrel_raycast.gd" id="2_wq388"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nsba"]
 transparency = 1
@@ -20,6 +21,7 @@ script = ExtResource("1_0fkwy")
 [node name="barrel_raycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 target_position = Vector3(0, 0, -100)
+script = ExtResource("2_wq388")
 
 [node name="laser" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -50)

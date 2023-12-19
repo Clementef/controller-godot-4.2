@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbfeufs5un8w1"]
+
+[ext_resource type="Texture2D" uid="uid://ckaafcfma51qc" path="res://assets/bullet_hole/bullet_hole.png" id="1_tqk44"]
+
+[node name="bullet_decal" type="Decal"]
+size = Vector3(0.05, 0.05, 0.05)
+texture_albedo = ExtResource("1_tqk44")

@@ -13,7 +13,7 @@ var idle_position:Vector3
 var reach_length = 1.
 var target = null
 
-func _init():
+func _ready():
 	if held_item:
 		held_item.set_physics(false)
 
@@ -23,7 +23,6 @@ func process_inputs():
 		interact()
 	if Input.is_action_just_pressed("throw"):
 		throw()
-	
 	# game object inputs
 	# exit if no held item
 	if !held_item:
@@ -37,7 +36,6 @@ func gameobject_map(input:String):
 		held_item.process_input(input)
 	if Input.is_action_just_released(input):
 		held_item.process_input(input + "_release")
-	
 
 func interact():
 	if interactor.colliding_with != null:
@@ -51,8 +49,8 @@ func interact():
 				collision.set_physics(false)
 				#reparent and set position
 				collision.get_parent().remove_child(collision)
-				collision.global_position = Vector3.ZERO
-				collision.global_rotation = Vector3.ZERO
+				collision.position = Vector3.ZERO
+				collision.rotation = Vector3.ZERO
 				hand_position.add_child(collision)
 			else:
 				print(name + " already holding " + held_item.item_data.name)

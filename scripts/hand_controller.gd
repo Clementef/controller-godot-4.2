@@ -10,6 +10,7 @@ extends Node3D
 @onready var left_hand = $left_hand
 @onready var right_hand = $right_hand
 
+var hands:Array
 var idle_position:Vector3
 var idle_position_2:Vector3
 
