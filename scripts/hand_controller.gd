@@ -17,9 +17,7 @@ var idle_position_2:Vector3
 func _ready():
 	idle_position = Vector3(-hands_idle_separation/2.,-hands_distance_below_eyes,-hands_distance)
 	idle_position_2 = Vector3(hands_idle_separation/2.,-hands_distance_below_eyes,-hands_distance)
-	left_hand.position = idle_position
 	right_hand.position = idle_position_2
-	left_hand.idle_position = idle_position
 	right_hand.idle_position = idle_position_2
 
 func _process(delta):

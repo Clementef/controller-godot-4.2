@@ -20,6 +20,7 @@ func shoot():
 	# add recoil
 	recoil.emit(recoil_v,recoil_roll,recoil_yaw,
 				impulse_x,impulse_y,impulse_z)
+	# cast bullet
 	barrel_raycast.cast_bullet_hole()
 	# exit if barrel raycast not colliding
 	if !barrel_raycast.is_colliding():

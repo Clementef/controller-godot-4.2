@@ -17,7 +17,7 @@ func _ready():
 	if held_item:
 		held_item.set_physics(false)
 
-func process_inputs():
+func _process(delta):
 	# native hand inputs
 	if Input.is_action_just_pressed("interact"):
 		interact()

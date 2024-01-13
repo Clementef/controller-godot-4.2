@@ -7,6 +7,13 @@ func cast_bullet_hole():
 	# instantiate and place bullet decal
 	var _decal = decal.instantiate()
 	get_collider().add_child(_decal)
+	
+	# cache data
+	var collision_pos = get_collision_point()
+	var collision_normal = get_collision_normal()
+	
+	# place decal and rotate
 	_decal.global_position = get_collision_point()
-	_decal.look_at(get_collision_point()+get_collision_normal(),Vector3.UP) # align with normal
-	_decal.transform.basis = Basis(Vector3.RIGHT, PI/2.) * _decal.transform.basis # rotate 90 on x
+	if collision_normal != Vector3.UP:
+		_decal.look_at(collision_pos+Vector3.UP, collision_normal)
+	_decal.rotate(collision_normal, randf_range(0, 2*PI))
